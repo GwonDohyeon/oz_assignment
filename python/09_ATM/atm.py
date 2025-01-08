@@ -11,5 +11,11 @@ while True:
         balance+=deposit_amount
         receipts.append(("입금",deposit_amount,balance))
         print(f'입금하신 금액은 {deposit_amount}원이고, 현재 잔액은 {balance}원 입니다.')
+    if num=='2':
+        withdraw_amount=int(input("출금할 금액을 입력해주세요:"))
+        withdraw_amount=min(balance,withdraw_amount)
+        balance-=withdraw_amount
+        receipts.append(("출금",withdraw_amount,balance))
+        print(f'출금하신 금액은 {withdraw_amount}원이고, 현재 잔액은 {balance}원 입니다.')
         
 print(f'서비스를 종료합니다. 현재 잔액은 {balance}원 입니다.')
