@@ -118,20 +118,20 @@ main() -> None: BankingService 인스턴스를 생성하고, 사용자로부터 
 - transaction_type, amount, balance 속성을 초기화하는 생성자를 구현하세요.
 - 타입 힌팅을 사용하여 생성자의 매개변수 타입을 지정하세요.
     - 함수 시그니처: __init__(self, transaction_type: str, amount: int, balance: int) -> None
-'''python
+```python
 #banking_system/models/transaction.py
 class Transaction:
     def __init__(self,transaction_type:str,amount:int,balance:int)->None:
         self.transaction_type=transaction_type
         self.amount=amount
         self.balance=balance
-'''
+```
 ##### 문제 1.2: 문자열 반환 메서드 구현
 
 - 거래 정보를 문자열로 반환하는 __str__ 메서드를 구현하세요.
 - 타입 힌팅을 사용하여 메서드의 반환 타입을 지정하세요.
     - 함수 시그니처: __str__(self) -> str
-'''python
+```python
 #banking_system/models/transaction.py
 class Transaction:
     def __init__(self,transaction_type:str,amount:int,balance:int)->None:
@@ -141,13 +141,13 @@ class Transaction:
     
     def __str__(self)->str:
         return f"거래내역:{self.transaction_type}, 입출금액:{self.amount}, 잔액:{self.balance}"
-'''
+```
 ##### 문제 1.3: 튜플 반환 메서드 구현
 
 - 거래 정보를 튜플로 반환하는 to_tuple 메서드를 구현하세요.
 - 타입 힌팅을 사용하여 메서드의 반환 타입을 지정하세요.
     - 함수 시그니처: to_tuple(self) -> tuple
-'''python
+```python
 #banking_system/models/transaction.py
 class Transaction:
     def __init__(self,transaction_type:str,amount:int,balance:int)->None:
@@ -160,7 +160,7 @@ class Transaction:
     
     def to_tuple(self)->tuple:
         return tuple(self.transaction_type,self.amount,self.balance)
-'''
+```
 #### 과제 2: Account 클래스 구현
 파일명: banking_system/models/account.py
 
@@ -185,20 +185,20 @@ class Transaction:
 - __balance와 transactions 리스트를 초기화하는 생성자를 구현하세요.
 - 타입 힌팅을 사용하여 생성자의 매개변수 타입을 지정하세요.
     - 함수 시그니처: __init__(self) -> None
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     def __init__(self)->None:
         self.transactions=[]
         self.__balance=0
-'''
+```
 ##### 문제 2.2: 입금 메서드 구현
 
 - 입금을 위한 deposit 메서드를 구현하세요.
 - 금액이 양수인지 확인한 후 잔고를 증가시키고, 거래 내역에 추가합니다.
 - 타입 힌팅을 사용하여 메서드의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: deposit(self, amount: int) -> None
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     def __init__(self)->None:
@@ -208,14 +208,14 @@ class Account:
         if amount>0:
             self.__balance+=amount
             self.transactions.append(Transaction("입금",amount,self.__balance))
-'''       
+```       
 ##### 문제 2.3: 출금 메서드 구현
 
 - 출금을 위한 withdraw 메서드를 구현하세요.
 - 금액이 잔고보다 크지 않고 양수인지 확인한 후 잔고를 감소시키고, 거래 내역에 추가합니다.
 - 타입 힌팅을 사용하여 메서드의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: withdraw(self, amount: int) -> None
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     def __init__(self)->None:
@@ -231,13 +231,13 @@ class Account:
             self.__balance-=amount
             self.transactions.append(Transaction("출금",amount,self.__balance))
         return
-'''            
+```            
 ##### 문제 2.4: 잔고 반환 메서드 구현
 
 - 잔고를 반환하는 get_balance 메서드를 구현하세요.
 - 타입 힌팅을 사용하여 메서드의 반환 타입을 지정하세요.
     - 함수 시그니처: get_balance(self) -> int
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     def __init__(self)->None:
@@ -255,13 +255,13 @@ class Account:
         return
     def get_balance(self)->int:
         return self.__balance
-'''
+```
 ##### 문제 2.5: 거래 내역 반환 메서드 구현
 
 - 거래 내역을 반환하는 get_transactions 메서드를 구현하세요.
 - 타입 힌팅을 사용하여 메서드의 반환 타입을 지정하세요.
     - 함수 시그니처: get_transactions(self) -> list
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     def __init__(self)->None:
@@ -281,7 +281,7 @@ class Account:
         return self.__balance
     def get_transactions(self)->list:
         return self.transactions
-'''
+```
 ##### 문제 2.6: 클래스 변수 및 메서드 구현
 
 - 클래스 변수 bank_name와 클래스 메소드 get_bank_name, set_bank_name을 구현하세요.
@@ -289,7 +289,7 @@ class Account:
     - 함수 시그니처:
         - get_bank_name(cls) -> str
         - set_bank_name(cls, name: str) -> None
-'''python
+```python
 #banking_system/models/account.py
 class Account:
     bank_name="oz_bank"
@@ -317,7 +317,7 @@ class Account:
     def set_bank_name(cls,name:str)->None:
         cls.bank_name=name
         return
-'''   
+```   
 #### 과제 3: User 클래스 구현
 파일명: banking_system/models/user.py
 
@@ -335,13 +335,13 @@ account: 사용자의 계좌를 나타내는 Account 객체
 - username과 account를 초기화하는 생성자를 구현하세요.
 - 타입 힌팅을 사용하여 생성자의 매개변수 타입을 지정하세요.
     - 함수 시그니처: __init__(self, username: str) -> None
-'''python
+```python
 #banking_system/models/user.py
 class User:
     def __init__(self,username:str)->None:
         self.account=Account()
         self.username=username
-'''
+```
 #### 과제 4: BankingService 클래스 구현
 파일명: banking_system/services/banking_service.py
 
@@ -365,20 +365,20 @@ class User:
 - 사용자 목록을 초기화하는 생성자를 구현하세요.
 - 타입 힌팅을 사용하여 생성자의 매개변수 타입을 지정하세요.
     - 함수 시그니처: __init__(self) -> None
-'''python
+```python
 #banking_system/services/banking_service.py
 class Banking_service:
     def __init__(self)->None:
         self.__users:list[User]=[]
         return
-'''
+```
 ##### 문제 4.2: 사용자 추가 메서드 구현
 
 - 사용자를 추가하는 add_user 메서드를 구현하세요.
 - User 객체를 생성하여 사용자 목록에 추가합니다.
 - 타입 힌팅을 사용하여 메서드의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: add_user(self, username: str) -> None
-'''python
+```python
 #banking_system/services/banking_service.py
 class Banking_service:
     def __init__(self)->None:
@@ -388,14 +388,14 @@ class Banking_service:
         user=User(username)
         self.__users.append(user)
         return
-'''
+```
 ##### 문제 4.3: 사용자 찾기 메서드 구현
 
 - 사용자를 찾는 find_user 메서드를 구현하세요.
 - 사용자 목록을 검색하여 해당 사용자를 반환하고, 없으면 예외를 발생시킵니다.
 - 타입 힌팅을 사용하여 메서드의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: find_user(self, username: str) -> User
-'''python
+```python
 #banking_system/services/banking_service.py
 class Banking_service:
     def __init__(self)->None:
@@ -410,14 +410,14 @@ class Banking_service:
             if i.username==username:
                 return i
         raise Exception(f"{username}이(가) 존재하지 않습니다.")
-'''
+```
 ##### 문제 4.4: 사용자 메뉴 제공 메서드 구현
 
 - 사용자 메뉴를 제공하는 user_menu 메서드를 구현하세요.
 - 사용자를 찾고, 입금, 출금, 잔고 확인, 거래 내역 기능을 제공하는 반복 루프를 구현합니다.
 - 타입 힌팅을 사용하여 메서드의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: user_menu(self, username: str) -> None
-'''python
+```python
 #banking_system/services/banking_service.py
 class Banking_service:
     def __init__(self)->None:
@@ -465,7 +465,7 @@ class Banking_service:
             except Exception as e:
                 print(f"오류가 발생했습니다: {e} 다시 시도해주세요.")
         return
-'''
+```
 #### 과제 5: 데코레이터 및 예외 처리 구현
 파일명: banking_system/utils/decorators.py, banking_system/utils/exceptions.py
 
@@ -479,7 +479,7 @@ class Banking_service:
 - validate_transaction 데코레이터를 작성하여 금액이 0보다 큰지 확인합니다.
 - 타입 힌팅을 사용하여 함수의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: validate_transaction(func: Callable) -> Callable
-'''python
+```python
 #banking_system/utils/decorators.py
 """class validate_transaction:
     def __init__(self,func):
@@ -501,7 +501,7 @@ def validate_transaction(func:callable)->callable:
         result=func(self,amount,*args,**kwargs)
         return result
     return wrapper
-'''
+```
 #### 문제 5.2: 사용자 정의 예외 클래스 구현
 
 - 사용자 정의 예외 클래스 InsufficientFundsError, NegativeAmountError, UserNotFoundError를 작성하세요.
@@ -510,7 +510,7 @@ def validate_transaction(func:callable)->callable:
         - InsufficientFundsError.__init__(self, balance: int) -> None
         - NegativeAmountError.__init__(self) -> None
         - UserNotFoundError.__init__(self, username: str) -> None
-'''python
+```python
 #banking_system/utils/exceptions.py
 class InsufficientFundsError(Exception):
     def __init__(self,balance:int)->None:
@@ -523,7 +523,7 @@ class UserNotFoundError(Exception):
     def __init__(self,username:str)->None:
         self.username = username
         super().__init__(f"사용자 '{username}'를 찾을 수 없습니다.")
-'''
+```
 #### 과제 6: 메인 함수 구현
 파일명: banking_system/main.py
 
@@ -540,7 +540,7 @@ class UserNotFoundError(Exception):
 - 사용자 메뉴를 통해 입금, 출금, 잔고 확인, 거래 내역 기능을 실행할 수 있도록 구현하세요.
 - 타입 힌팅을 사용하여 함수의 매개변수와 반환 타입을 지정하세요.
     - 함수 시그니처: main() -> None
-'''python
+```python
 #banking_system/main.py
 def main()->None:
     banking_service=Banking_service()
@@ -565,4 +565,4 @@ def main()->None:
         except Exception as e:
             print(e)
     return
-'''
+```
