@@ -1,2 +1,4 @@
 admin_info.yaml
 __pycache__
+.venv
+pyvenv.cfg
