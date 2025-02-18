@@ -259,6 +259,7 @@ function getUserInfo(
   };
   return userInfo;
 }
+
 // 폼 제출 이벤트 리스너 추가
 form.addEventListener('submit', function (event) {
   event.preventDefault();
