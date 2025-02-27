@@ -1,7 +1,6 @@
 from flask import Flask,render_template
 from flask_smorest import Api
 from db import db
-from models import User,Board
 from routes.users import user_blp
 from routes.board import board_blp
 app=Flask(__name__)
