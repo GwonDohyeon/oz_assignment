@@ -1,3 +1,3 @@
-from .user_schema import UserSchema
 from .board_schema import BoardSchema
-__all__=["UserSchema","BoardSchema"]
+from .user_schema import UserSchema
+__all__=["BoardSchema","UserSchema"]
