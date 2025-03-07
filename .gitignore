@@ -149,3 +149,17 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 package-lock.json
 package.json
+
+AWS/
+
+Database/
+
+Flask/
+
+Git_Github/
+
+HTML_CSS/
+
+Linux/
+
+Python/
