@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse,Http404
 from django.shortcuts import render
+from bookmark.views import bookmark_detail, bookmark_list
+from todo.views import todo_list,todo_info
 from fake_db import user_db
 
 _db = user_db
@@ -86,13 +88,16 @@ def movies_detail(request,i):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    path('book_list',book_list),
-    path('book_list/<int:num>',book),
-    path('lang/<str:lang>',lang),
-    path('movie/<int:i>',movies_detail),
-    path('movie',movies),
-    path('users/', user_list, name='user_list'),
-    path('users/<int:user_id>/', user_info, name='user_info'),
-    path('admin/', admin.site.urls),
+    #path('',index),
+    #path('book_list/',book_list),
+    #path('book_list/<int:num>',book),
+    #path('lang/<str:lang>',lang),
+    #path('movie/<int:i>',movies_detail),
+    #path('movie/',movies),
+    #path('users/', user_list, name='user_list'),
+    #path('users/<int:user_id>/', user_info, name='user_info'),
+    path('bookmark/',bookmark_list),#모든 경로는 '/'를 붙여야한다, 안붙이면 '/url/'로 redirection수행
+    path('bookmark/<int:pk>/',bookmark_detail),
+    path('todo/',todo_list),
+    path('todo/<int:todo_id>/',todo_info),
 ]
