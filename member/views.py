@@ -5,10 +5,6 @@ from django.contrib.auth import login as django_login
 from django.urls import reverse
 
 def signup(request):
-    username=request.POST.get('username')
-    password1=request.POST.get('password1')
-    password2=request.POST.get('password2')
-    
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
             form.save()
@@ -31,6 +27,9 @@ def login(request):
     form=AuthenticationForm(request,request.POST or None)
     if form.is_valid():
         django_login(request,form.get_user())
+        next=request.GET.get('next')
+        if next:
+            return redirect(next)# next=create라면 blog_list로 redirect하지않고 create로 redirect
         return redirect(reverse('blog_list'))
     context={
         'form':form

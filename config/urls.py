@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from blog.views import blog_list,blog_detail
+from blog.views import blog_list,blog_detail,blog_create,blog_update,blog_delete
 from member.views import signup,login
 
 urlpatterns = [
@@ -26,4 +26,7 @@ urlpatterns = [
     path('',blog_list,name='blog_list'),
     path('signup/',signup,name='signup'),
     path('login/',login,name='login'),
+    path('create/',blog_create,name='blog_create'),
+    path('<int:pk>/update/',blog_update,name='blog_update'),
+    path('<int:pk>/delete/',blog_delete,name='blog_delete'),
 ]
