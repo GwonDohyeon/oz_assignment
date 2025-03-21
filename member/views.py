@@ -30,7 +30,7 @@ def login(request):
         next=request.GET.get('next')
         if next:
             return redirect(next)# next=create라면 blog_list로 redirect하지않고 create로 redirect
-        return redirect(reverse('blog_list'))
+        return redirect(reverse('blog:list'))
     context={
         'form':form
     }
