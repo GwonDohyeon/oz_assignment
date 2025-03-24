@@ -22,6 +22,8 @@ from blog.views import (blog_list,blog_detail,blog_create,blog_update,blog_delet
 from member.views import signup,login
 from django.views.generic import TemplateView,RedirectView
 from django.views import View
+from django.conf import settings
+from django.conf.urls.static import static
 """
 class AboutView(TemplateView):
     template_name='about.html'
@@ -51,4 +53,8 @@ urlpatterns = [
     # path('redirect2/',lambda req: redirect(reverse('about'))),
     # path('test/',TestView.as_view(),name='test'),
     path('',include('blog.urls')),
+    path('summernote/',include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

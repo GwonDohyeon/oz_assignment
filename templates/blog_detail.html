@@ -1,26 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{blog.title}}</h1>
+<div class="mt-2 d-flex justify-content-between">
+    <h1>{{blog.title}}</h1>
     <div>
         작성자: {{blog.author.username}} {{test}}
         {% if request.user == blog.author or request.user.is_superuser %}
-        <a href="{% url 'blog:update' blog.pk %}">수정</a>
-        <form id='delete_form' method="POST" action="{% url 'blog:delete' blog.pk %}">
-            {%csrf_token%}
-            <button type="button" id="delete_btn">삭제</button>
+        <a href="{% url 'blog:update' blog.pk %}" class="btn btn-sm btn-warning">수정</a>
+        <form id="delete_form" method="POST" action="{% url 'blog:comment_create' blog.pk %}">
+            {% csrf_token %}
+            <button type="button" id="delete_btn" class="btn btn-sm btn-danger">삭제</button>
         </form>
         {% endif %}
     </div>
+</div>
+<hr>
+{% if blog.image %}
+    <img src="{{blog.image.url}}" alt="" class="w-100">
+{% endif %}
+<p>{{blog.content | safe }}</p>
+<hr>
+
+{% if request.user.is_authenticated %}
+<form method="POST" action="{% url 'blog:comment_create' blog.pk %}">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button class="btn btn-primary btn-sm text-end">작성</button>
+</form>
+{% endif %}
+<hr>
+<div id="comment-wrapper">
+    {% for comment in object_list %}
+    <div class="comment-box">
+        <p>{{ comment.content }}</p>
+        <p class="text-end">
+            <small>{{ comment.created_at|date:'Y-m-d H:i' }} | {{ comment.author.username }}</small>
+        </p>
+        <div class=" d-flex justify-content-end">
+            {% if request.user == comment.author or request.user.is_superuser %}
+            <form class="comment-delete-form " method="POST" action="{% url 'blog:comment_delete' comment.pk %}">
+                {% csrf_token %}
+                <button type="button" class="comment-delete-btn btn btn-sm btn-danger">삭제</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
     <hr>
-    <p>{{blog.content}}</p>
-    <a href="{%url 'blog:list'%}">목록으로 돌아가기</a>
+    {% endfor %}
+</div>
+{% include 'pagination.html' with fragment='comment-wrapper' %}
+<a href="{% url 'blog:list' %}" class="btn btn-sm btn-info">이전</a>
 {% endblock %}
+
 {% block js %}
-    <script>
-        document.querySelector('#delete_btn').addEventListener('click',function(){
-            if(confirm('정말 삭제하시겠습니까?')){
-                document.querySelector('#delete_form').submit();
+<script>
+    // 게시글 삭제 버튼 이벤트
+    document.querySelector('#delete_btn').addEventListener('click', function () {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            document.querySelector('#delete_form').submit();
+        }
+    });
+
+    // 모든 댓글 삭제 버튼에 이벤트 추가
+    document.querySelectorAll('.comment-delete-btn').forEach((btn, index) => {
+        btn.addEventListener('click', function () {
+            if (confirm('댓글을 정말 삭제하시겠습니까?')) {
+                document.querySelectorAll('.comment-delete-form')[index].submit();
             }
-        })
-    </script>
+        });
+    });
+</script>
 {% endblock %}
